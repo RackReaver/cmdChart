@@ -22,7 +22,7 @@ def loader(data, value_slice, chart_type='bar', marker='X'):
     for value in data.values():
         if value > max_value:
             max_value = value
-    
+
     num_of_slices = (max_value)/value_slice
 
     y_axis = []
@@ -46,7 +46,8 @@ def loader(data, value_slice, chart_type='bar', marker='X'):
         data_row = []
         for col in data.values():
             if num+1 <= col:
-                data_row.append('{}'.format(_add_char(x_axis_spacing, char=marker)))
+                data_row.append('{}'.format(
+                    _add_char(x_axis_spacing, char=marker)))
             else:
                 data_row.append('{}'.format(_add_char(x_axis_spacing)))
         data_rows.insert(0, data_row)
@@ -54,6 +55,7 @@ def loader(data, value_slice, chart_type='bar', marker='X'):
     chart_str = build_chart(y_axis, x_axis, data_rows)
 
     print(chart_str)
+
 
 def build_chart(y_axis, x_axis, data_array, data_buffer=1, y_axis_buffer=1):
     final_str = ''
@@ -65,28 +67,31 @@ def build_chart(y_axis, x_axis, data_array, data_buffer=1, y_axis_buffer=1):
     # Loop through y_axis names and data_array
     for num in range(len((y_axis))):
         row_str = ''
-        
+
         if len(str(y_axis[num])) < y_axis_spacing:
             space = y_axis_spacing - len(str(y_axis[num]))
             row_str += _add_char(space)
 
         row_str += '{}{}|'.format(y_axis[num], _add_char(y_axis_buffer))
-        
+
         for value in data_array[num]:
-            row_str += '{}{}{}'.format(_add_char(data_buffer), value, _add_char(data_buffer))
+            row_str += '{}{}{}'.format(_add_char(data_buffer),
+                                       value, _add_char(data_buffer))
 
         row_str += '\n'
 
         final_str += row_str
-    
+
     # Add break line before x axis names
-    final_str += '{}{}\n'.format(_add_char(y_axis_spacing+2), _add_char((x_axis_spacing+data_buffer*2)*len(x_axis), char='-'))
-    
+    final_str += '{}{}\n'.format(_add_char(y_axis_spacing+2),
+                                 _add_char((x_axis_spacing+data_buffer*2)*len(x_axis), char='-'))
+
     # Loop through x axis names
     row_str = ''
     final_str += _add_char(y_axis_spacing+2)
     for name in x_axis:
-        row_str += '{}{}{}'.format(_add_char(data_buffer), name, _add_char(data_buffer))
+        row_str += '{}{}{}'.format(_add_char(data_buffer),
+                                   name, _add_char(data_buffer))
 
     final_str += row_str
 
@@ -113,6 +118,7 @@ def _add_char(num, char=' '):
     for i in range(num):
         string += char
     return string
+
 
 if __name__ == '__main__':
     data = {
