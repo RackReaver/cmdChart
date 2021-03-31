@@ -14,7 +14,7 @@ def loader(data, value_slice, chart_type='bar', marker='X'):
     kwargs:
         chart_type (str): bar
 
-    return (list): chart list array
+    return (str): Chart in a string format
     """
     max_value = 0
 
@@ -54,7 +54,7 @@ def loader(data, value_slice, chart_type='bar', marker='X'):
 
     chart_str = build_chart(y_axis, x_axis, data_rows)
 
-    print(chart_str)
+    return chart_str
 
 
 def build_chart(y_axis, x_axis, data_array, data_buffer=1, y_axis_buffer=1):
@@ -99,6 +99,14 @@ def build_chart(y_axis, x_axis, data_array, data_buffer=1, y_axis_buffer=1):
 
 
 def get_spacing(check_list):
+    """Given a list compute the length required to fit data
+
+    args:
+        check_list (list): List of titles/values
+
+    return (int): Length of each list item.
+
+    """
     column_width = 0
     for item in check_list:
         if len(str(item)) > column_width:
